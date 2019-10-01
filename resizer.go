@@ -12,10 +12,6 @@ import (
 	"math"
 )
 
-var (
-	ErrExtractAreaParamsRequired = errors.New("extract area width/height params are required")
-)
-
 // resizer is used to transform a given image as byte buffer
 // with the passed options.
 func resizer(buf []byte, o Options) ([]byte, error) {
@@ -71,8 +67,9 @@ func resizer(buf []byte, o Options) ([]byte, error) {
 	}
 
 	// Try to use libjpeg/libwebp shrink-on-load
-	supportsShrinkOnLoad := imageType == WEBP && VipsMajorVersion >= 8 && VipsMinorVersion >= 3
-	supportsShrinkOnLoad = supportsShrinkOnLoad || imageType == JPEG
+
+	supportsShrinkOnLoad := imageType == WEBP && VipsMajorVersion >= 8 && VipsMinorVersion >= 3 && !o.NoShrink
+	supportsShrinkOnLoad = imageType == JPEG
 	if supportsShrinkOnLoad && shrink >= 2 {
 		tmpImage, factor, err := shrinkOnLoad(buf, image, imageType, factor, shrink)
 		if err != nil {

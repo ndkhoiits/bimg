@@ -210,6 +210,7 @@ type Options struct {
 	StripMetadata  bool
 	Trim           bool
 	Lossless       bool
+	NoShrink       bool
 	Extend         Extend
 	Rotate         Angle
 	Background     Color
