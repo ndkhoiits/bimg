@@ -14,14 +14,9 @@ type ImageSize struct {
 
 // ImageMetadata represents the basic metadata fields
 type ImageMetadata struct {
-	Orientation int
-	Channels    int
-	Alpha       bool
-	Profile     bool
-	Type        string
-	Space       string
-	Colourspace string
-	Size        ImageSize
+	Alpha bool
+	Type  string
+	Size  ImageSize
 }
 
 // Size returns the image size by width and height pixels.
@@ -64,13 +59,9 @@ func Metadata(buf []byte) (ImageMetadata, error) {
 	}
 
 	metadata := ImageMetadata{
-		Size:        size,
-		Channels:    int(image.Bands),
-		Orientation: vipsExifOrientation(image),
-		Alpha:       vipsHasAlpha(image),
-		Profile:     vipsHasProfile(image),
-		Space:       vipsSpace(image),
-		Type:        ImageTypeName(imageType),
+		Size:  size,
+		Alpha: vipsHasAlpha(image),
+		Type:  ImageTypeName(imageType),
 	}
 
 	return metadata, nil
