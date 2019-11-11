@@ -76,10 +76,6 @@ type vipsWatermarkTextOptions struct {
 	Font *C.char
 }
 
-func init() {
-	Initialize()
-}
-
 // Initialize is used to explicitly start libvips in thread-safe way.
 // Only call this function if you have previously turned off libvips.
 func Initialize() {
