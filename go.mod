@@ -1,3 +1,3 @@
-module github.com/ducmeit1/bimg
+module github.com/Beeketing/bimg
 
 go 1.12
